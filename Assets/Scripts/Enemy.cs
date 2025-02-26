@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Vector3 initialPosition;
+    
 
+    public Vector3 initialPosition;
+    //public EnemyManager enemyManager;
     void Start()
     {
         initialPosition = transform.position;
@@ -13,8 +15,13 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("PlayerBullet"))
         {
-            gameObject.SetActive(false);
-            Destroy(other.gameObject);
+
+            EnemyManager.Instance.DeactivateEnemy(transform);
+            //gameObject.SetActive(false);
+            //Destroy(other.gameObject);
+
+            
+            
         }
     }
 }

@@ -17,6 +17,19 @@ public class EnemyManager : MonoBehaviour
     private int score = 0;
 
     public event Action OnEnemyDeactivated;
+    public static EnemyManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -28,6 +41,7 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         MoveEnemies();
+        ;
     }
 
     void MoveEnemies()
@@ -59,27 +73,31 @@ public class EnemyManager : MonoBehaviour
                 }
             }
         }
+
     }
+    
+
 
     public void DeactivateEnemy(Transform enemy)
     {
+        
         Debug.Log("DeactivateEnemy called for: " + enemy.name);
         if (enemy != null && enemy.gameObject.activeSelf)
         {
-            enemy.gameObject.SetActive(false);
-            activeEnemies.Remove(enemy);
             score += 50;
             UpdateScoreText();
+            enemy.gameObject.SetActive(false);
+            activeEnemies.Remove(enemy);
+            
             OnEnemyDeactivated?.Invoke();
         }
     }
 
     private void UpdateScoreText()
     {
-        if (scoreText != null)
-        {
+        
             scoreText.text = "Score: " + score;
-        }
+        
     }
 
     public bool AllEnemiesDeactivated()

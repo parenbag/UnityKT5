@@ -8,8 +8,6 @@ public class PlayerHealth : MonoBehaviour
     public GameObject heart1;
     public GameObject heart2;
     public GameObject heart3;
-    public GameObject scoreLegacyText;
-    public GameObject legacyTextGO;
 
     private bool isGameOver = false;
 
@@ -51,8 +49,6 @@ public class PlayerHealth : MonoBehaviour
                 break;
             case 0:
                 heart3.SetActive(false);
-                scoreLegacyText.SetActive(false);
-                legacyTextGO.SetActive(true);
                 break;
         }
     }
